@@ -4,9 +4,8 @@ WAY
 
 
 #include<sys/utsname.h>	/* Header for 'uname'  */
-//#include<sys/sysinfo.h>	/* Header for 'sysinfo' */
+#include<sys/sysinfo.h>	/* Header for 'sysinfo' */
 #include<stdio.h>
-
 #include<sys/sysctl.h> /* Header for system info */
 #include <sys/types.h> /* Header for system info */
 
@@ -27,8 +26,11 @@ int main()
 	int cpuType = 0;
 	int cpuSubType = 0;
 	int secureLevel = 0;
+/*Bilgehan: New addition
 	timeval bootTime = 0;
+
 	clocking clockRate = 0;
+*/
 
 	result = uname(&uname_pointer); 
 
@@ -51,8 +53,8 @@ int main()
 	**********************************/
 	//result = sysinfo(&sysinfo_pointer);
 
-           size_t len = sizeof(maxproc);
-           sysctlbyname("kern.maxproc", &maxproc, &len, NULL, 0);
+           size_t len = sizeof(int);
+           sysctlbyname("kern.maxproc", &maxProc, &len, NULL, 0);
 	result = sysctl (name, namelen, NULL , 0 , NULL, 0);
 
 	if(result != 0)
